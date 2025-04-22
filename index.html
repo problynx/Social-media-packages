@@ -11,7 +11,7 @@
       padding: 0;
       background-color: #000;
       color: #fff;
-      overflow-x: hidden; /* منع التمرير الأفقي */
+      overflow: hidden;
       background-image: url('background.jpg');
       background-size: cover;
       background-position: center center;
@@ -37,7 +37,7 @@
       position: absolute;
       padding: 20px;
       width: 100%;
-      max-width: 100%;
+      max-width: 800px;
       pointer-events: none;
       transition: opacity 0.5s ease, transform 0.5s ease;
     }
@@ -50,7 +50,6 @@
 
     .video video {
       width: 100%;
-      height: auto;
       border-radius: 10px;
       box-shadow: 0 0 60px 20px rgba(0, 0, 0, 0.9);
       margin-top: 60px;
@@ -185,16 +184,16 @@
       }
     }
 
-    /* Media query for mobile responsiveness */
+    /* تعديل التنسيق عند تصفح الموقع من الهاتف */
     @media (max-width: 768px) {
+      /* تغيير تصنيف الفيديوهات وواجهة الصفحة */
       .video-container {
         height: auto;
       }
 
       .video video {
         width: 100%;
-        height: auto;
-        max-width: 100%;
+        max-width: none;
       }
 
       h2 {
@@ -210,10 +209,45 @@
         font-size: 16px;
       }
 
+      /* تحجيم الأزرار لتناسب الهاتف */
       .arrows button {
+        font-size: 18px;
+      }
+
+      .ask-btn {
+        top: auto;
+        bottom: 10px;
+        left: 10px;
+        right: 10px;
+        z-index: 999;
+      }
+    }
+
+    /* عندما لا يتجاوز العرض 500px، يتم تغيير كل شيء ليشبه تصميم الموقع المخصص للكمبيوتر */
+    @media (max-width: 500px) {
+      body {
+        background-image: none;
+      }
+
+      .video-container {
+        flex-direction: row;
+        justify-content: flex-start;
+      }
+
+      .video {
+        width: 45%;
+        margin: 10px;
+      }
+
+      .contact-btn {
+        font-size: 14px;
+      }
+
+      h2 {
         font-size: 20px;
       }
     }
+
   </style>
 </head>
 <body>
