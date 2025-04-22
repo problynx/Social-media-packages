@@ -11,7 +11,7 @@
       padding: 0;
       background-color: #000;
       color: #fff;
-      overflow: hidden;
+      overflow-x: hidden; /* منع التمرير الأفقي */
       background-image: url('background.jpg');
       background-size: cover;
       background-position: center center;
@@ -37,7 +37,7 @@
       position: absolute;
       padding: 20px;
       width: 100%;
-      max-width: 800px;
+      max-width: 100%;
       pointer-events: none;
       transition: opacity 0.5s ease, transform 0.5s ease;
     }
@@ -50,6 +50,7 @@
 
     .video video {
       width: 100%;
+      height: auto;
       border-radius: 10px;
       box-shadow: 0 0 60px 20px rgba(0, 0, 0, 0.9);
       margin-top: 60px;
@@ -184,6 +185,7 @@
       }
     }
 
+    /* Media query for mobile responsiveness */
     @media (max-width: 768px) {
       .video-container {
         height: auto;
@@ -191,7 +193,8 @@
 
       .video video {
         width: 100%;
-        max-width: none;
+        height: auto;
+        max-width: 100%;
       }
 
       h2 {
@@ -205,6 +208,10 @@
 
       .locked-message {
         font-size: 16px;
+      }
+
+      .arrows button {
+        font-size: 20px;
       }
     }
   </style>
