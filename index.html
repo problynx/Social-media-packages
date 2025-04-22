@@ -186,7 +186,6 @@
 
     /* تعديل التنسيق عند تصفح الموقع من الهاتف */
     @media (max-width: 768px) {
-      /* تغيير تصنيف الفيديوهات وواجهة الصفحة */
       .video-container {
         height: auto;
       }
@@ -209,7 +208,6 @@
         font-size: 16px;
       }
 
-      /* تحجيم الأزرار لتناسب الهاتف */
       .arrows button {
         font-size: 18px;
       }
@@ -223,28 +221,31 @@
       }
     }
 
-    /* عندما لا يتجاوز العرض 500px، يتم تغيير كل شيء ليشبه تصميم الموقع المخصص للكمبيوتر */
+    /* تصميم أكثر تجاوبًا للأجهزة الصغيرة جدًا */
     @media (max-width: 500px) {
       body {
         background-image: none;
       }
 
       .video-container {
-        flex-direction: row;
-        justify-content: flex-start;
+        flex-direction: column;
+        justify-content: center;
       }
 
       .video {
-        width: 45%;
-        margin: 10px;
+        width: 100%;
+        margin: 10px 0;
       }
 
       .contact-btn {
         font-size: 14px;
+        padding: 10px 20px;
       }
 
       h2 {
         font-size: 20px;
+        position: relative;
+        top: 10px;
       }
     }
 
