@@ -15,6 +15,8 @@
       background-image: url('background.jpg');
       background-size: cover;
       background-position: center center;
+      box-shadow: 0 0 100px rgba(0, 0, 0, 0.8);
+      transition: background-position 0.5s ease-in-out;
     }
 
     .video-container {
@@ -49,7 +51,7 @@
     .video video {
       width: 100%;
       border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
+      box-shadow: 0 0 60px 20px rgba(0, 0, 0, 0.9);
       margin-top: 60px;
     }
 
@@ -62,6 +64,7 @@
       margin: 0;
       z-index: 10;
       font-weight: bold;
+      text-shadow: 3px 3px 15px rgba(0, 0, 0, 0.8);
     }
 
     .contact-btn {
@@ -74,6 +77,7 @@
       font-size: 18px;
       margin-top: 20px;
       transition: background-color 0.3s ease, transform 0.2s ease;
+      box-shadow: 0 0 25px rgba(0, 0, 0, 0.8);
     }
 
     .contact-btn:hover {
@@ -91,8 +95,8 @@
     }
 
     @keyframes blink {
-      0%, 100% { box-shadow: 0 0 10px #8b0000; }
-      50% { box-shadow: 0 0 20px red; }
+      0%, 100% { box-shadow: 0 0 15px #8b0000; }
+      50% { box-shadow: 0 0 30px red; }
     }
 
     .lock-icon {
@@ -143,6 +147,43 @@
       color: #ff4444;
     }
 
+    .ask-btn {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background-color: #b8860b;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 30px;
+      font-weight: bold;
+      text-decoration: none;
+      font-size: 16px;
+      box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+      overflow: hidden;
+      z-index: 999;
+    }
+
+    .ask-btn::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -75%;
+      width: 50%;
+      height: 100%;
+      background: linear-gradient(120deg, rgba(255,255,255,0.2), rgba(255,255,255,0));
+      transform: skewX(-25deg);
+      animation: shine 2s infinite;
+    }
+
+    @keyframes shine {
+      0% {
+        left: -75%;
+      }
+      100% {
+        left: 125%;
+      }
+    }
+
     @media (max-width: 768px) {
       .video-container {
         height: auto;
@@ -172,27 +213,28 @@
 
 <audio id="arrow-sound" src="arrow.mp3" preload="auto"></audio>
 
+<a href="https://example.com/ask" class="ask-btn">استفسر عن خدمة أخرى</a>
+
 <div class="video-container">
   <div class="video" id="video1">
-    <h2>Doctors package
-    </h2>
+    <h2>Doctors package</h2>
     <video id="video1-element" src="video1.mp4" controls muted></video>
-    <a href="https://api.whatsapp.com/send/?phone=201055148437&text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7+%D8%A7%D8%B1%D9%8A%D8%AF+%D8%A7%D9%84%D8%A7%D8%B3%D8%AA%D9%81%D8%B3%D8%A7%D8%B1+%D8%B9%D9%86+%D8%AE%D8%AF%D9%85%D8%A7%D8%AA%D9%83%D9%85&type=phone_number&app_absent=0" class="contact-btn">Contact us</a>
+    <a href="https://example.com/contact" class="contact-btn">Contact us</a>
   </div>
   <div class="video" id="video2">
     <h2>Advertising and marketing package</h2>
     <video id="video2-element" src="video2.mp4" controls muted></video>
-    <a href="https://api.whatsapp.com/send/?phone=201055148437&text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7+%D8%A7%D8%B1%D9%8A%D8%AF+%D8%A7%D9%84%D8%A7%D8%B3%D8%AA%D9%81%D8%B3%D8%A7%D8%B1+%D8%B9%D9%86+%D8%AE%D8%AF%D9%85%D8%A7%D8%AA%D9%83%D9%85&type=phone_number&app_absent=0" class="contact-btn">Contact us</a>
+    <a href="https://example.com/contact" class="contact-btn">Contact us</a>
   </div>
   <div class="video locked" id="video3">
-    <h2>Advertising campaign packages on Facebook - Instagram </h2>
+    <h2>Advertising campaign packages on Facebook - Instagram</h2>
     <div class="lock-icon">🔒</div>
     <div class="locked-message">غير متوفر الآن 😊</div>
     <video id="video3-element" src="video3.mp4" controls muted></video>
     <a href="#" class="contact-btn" style="pointer-events: none; background-color: #808080;">Contact us</a>
   </div>
   <div class="video locked" id="video4">
-    <h2>Social media page management </h2>
+    <h2>Social media page management</h2>
     <div class="lock-icon">🔒</div>
     <div class="locked-message">غير متوفر الآن 😊</div>
     <video id="video4-element" src="video4.mp4" controls muted></video>
@@ -240,266 +282,15 @@
       newVideoElement.muted = false;
     }
 
-    currentIndex = index;
-  }
-
-  document.getElementById('prev').addEventListener('click', () => {
-    const newIndex = (currentIndex > 0) ? currentIndex - 1 : totalVideos - 1;
-    arrowSound.play();
-    showVideo(newIndex);
-  });
-
-  document.getElementById('next').addEventListener('click', () => {
-    const newIndex = (currentIndex < totalVideos - 1) ? currentIndex + 1 : 0;
-    arrowSound.play();
-    showVideo(newIndex);
-  });
-
-  showVideo(currentIndex);
-</script>
-
-</body>
-</html>
-<!DOCTYPE html>
-<html lang="ar">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>موقع الفيديوهات</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      background-color: #000;
-      color: #fff;
-      overflow: hidden;
-      background-image: url('background.jpg');
-      background-size: cover;
-      background-position: center center;
-    }
-
-    .video-container {
-      position: relative;
-      width: 100%;
-      height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      overflow: hidden;
-      flex-direction: column;
-      text-align: center;
-    }
-
-    .video {
-      opacity: 0;
-      transform: translateX(100%);
-      position: absolute;
-      padding: 20px;
-      width: 100%;
-      max-width: 800px;
-      pointer-events: none;
-      transition: opacity 0.5s ease, transform 0.5s ease;
-    }
-
-    .video.active {
-      opacity: 1;
-      transform: translateX(0);
-      pointer-events: auto;
-    }
-
-    .video video {
-      width: 100%;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
-      margin-top: 60px;
-    }
-
-    h2 {
-      font-size: 24px;
-      position: absolute;
-      top: 10px;
-      left: 50%;
-      transform: translateX(-50%);
-      margin: 0;
-      z-index: 10;
-      font-weight: bold;
-    }
-
-    .contact-btn {
-      display: inline-block;
-      background-color: #8b0000;
-      color: white;
-      padding: 15px 30px;
-      text-decoration: none;
-      border-radius: 5px;
-      font-size: 18px;
-      margin-top: 20px;
-      transition: background-color 0.3s ease, transform 0.2s ease;
-    }
-
-    .contact-btn:hover {
-      background-color: #a30000;
-      transform: scale(1.05);
-    }
-
-    .contact-btn:active {
-      background-color: #5c0000;
-      transform: scale(0.98);
-    }
-
-    .video:not(.locked) .contact-btn {
-      animation: blink 1s infinite;
-    }
-
-    @keyframes blink {
-      0%, 100% { box-shadow: 0 0 10px #8b0000; }
-      50% { box-shadow: 0 0 20px red; }
-    }
-
-    .lock-icon {
-      position: absolute;
-      top: 5%;
-      right: 5%;
-      font-size: 50px;
-      color: red;
-      display: none;
-    }
-
-    .video.locked .lock-icon {
-      display: block;
-    }
-
-    .locked-message {
-      position: absolute;
-      top: 25%;
-      width: 100%;
-      font-size: 18px;
-      color: #f00;
-      font-weight: bold;
-    }
-
-    .arrows {
-      position: absolute;
-      top: 50%;
-      width: 100%;
-      display: flex;
-      justify-content: space-between;
-      transform: translateY(-50%);
-    }
-
-    button {
-      background: none;
-      color: white;
-      border: none;
-      font-size: 24px;
-      cursor: pointer;
-      transition: color 0.3s ease;
-    }
-
-    button:active {
-      color: red;
-    }
-
-    button:hover {
-      color: #ff4444;
-    }
-
-    @media (max-width: 768px) {
-      .video-container {
-        height: auto;
-      }
-
-      .video video {
-        width: 100%;
-        max-width: none;
-      }
-
-      h2 {
-        font-size: 18px;
-        top: 5px;
-      }
-
-      .contact-btn {
-        font-size: 16px;
-      }
-
-      .locked-message {
-        font-size: 16px;
-      }
-    }
-  </style>
-</head>
-<body>
-
-<audio id="arrow-sound" src="arrow.mp3" preload="auto"></audio>
-
-<div class="video-container">
-  <div class="video" id="video1">
-    <h2>باقة الأطباء</h2>
-    <video id="video1-element" src="video1.mp4" controls muted></video>
-    <a href="https://example.com/contact" class="contact-btn">تواصل معنا</a>
-  </div>
-  <div class="video" id="video2">
-    <h2>باقة الصحة العامة</h2>
-    <video id="video2-element" src="video2.mp4" controls muted></video>
-    <a href="https://example.com/contact" class="contact-btn">تواصل معنا</a>
-  </div>
-  <div class="video locked" id="video3">
-    <h2>باقة التغذية</h2>
-    <div class="lock-icon">🔒</div>
-    <div class="locked-message">غير متوفر الآن 😊</div>
-    <video id="video3-element" src="video3.mp4" controls muted></video>
-    <a href="#" class="contact-btn" style="pointer-events: none; background-color: #808080;">تواصل معنا</a>
-  </div>
-  <div class="video locked" id="video4">
-    <h2>باقة اللياقة البدنية</h2>
-    <div class="lock-icon">🔒</div>
-    <div class="locked-message">غير متوفر الآن 😊</div>
-    <video id="video4-element" src="video4.mp4" controls muted></video>
-    <a href="#" class="contact-btn" style="pointer-events: none; background-color: #808080;">تواصل معنا</a>
-  </div>
-  <div class="video locked" id="video5">
-    <h2>باقة الصحة النفسية</h2>
-    <div class="lock-icon">🔒</div>
-    <div class="locked-message">غير متوفر الآن 😊</div>
-    <video id="video5-element" src="video5.mp4" controls muted></video>
-    <a href="#" class="contact-btn" style="pointer-events: none; background-color: #808080;">تواصل معنا</a>
-  </div>
-
-  <div class="arrows">
-    <button id="prev">◁</button>
-    <button id="next">▷</button>
-  </div>
-</div>
-
-<script>
-  let currentIndex = 0;
-  const videos = document.querySelectorAll('.video');
-  const videoElements = document.querySelectorAll('video');
-  const totalVideos = videos.length;
-  const arrowSound = document.getElementById('arrow-sound');
-
-  function showVideo(index) {
-    const currentVideoElement = videoElements[currentIndex];
-    if (currentVideoElement) {
-      currentVideoElement.pause();
-      currentVideoElement.currentTime = 0;
-      currentVideoElement.muted = true;
-    }
-
-    videos.forEach((video) => {
-      video.classList.remove('active');
-    });
-
-    const newVideo = videos[index];
-    newVideo.classList.add('active');
-    const newVideoElement = newVideo.querySelector('video');
-    if (newVideoElement) {
-      newVideoElement.currentTime = 0;
-      newVideoElement.play();
-      newVideoElement.muted = false;
-    }
+    const backgroundPositions = [
+      'center 20%',
+      'center 40%',
+      'center 60%',
+      'center 80%',
+      'center 100%'
+    ];
+    
+    document.body.style.backgroundPosition = backgroundPositions[index];
 
     currentIndex = index;
   }
